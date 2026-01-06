@@ -15,6 +15,16 @@
     <section>
         <h1>بازی حدس عدد</h1>
         <p>یک عدد بین 1 تا 100 را حدس بزنید</p>
+        <div class="counter-container">
+            <div class="counter-item">
+                <span class="counter-label">تلاش‌های استفاده شده:</span>
+                <span class="counter-value" id="attemptsUsed">0</span>
+            </div>
+            <div class="counter-item">
+                <span class="counter-label">فرصت‌های باقی‌مانده:</span>
+                <span class="counter-value" id="attemptsLeft">10</span>
+            </div>
+        </div>
         <div>
             <input type="number" placeholder="حدس خود را وارد کنید" id="guessFile">
             <button id="submitGuess">ارسال</button>
