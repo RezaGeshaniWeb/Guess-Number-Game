@@ -7,27 +7,27 @@
     <title>Guess Number</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <section>
-        <h1>بازی حدس عدد</h1>
-        <p>یک عدد بین 1 تا 100 را حدس بزنید</p>
+        <h1>Guess Number Game</h1>
+        <p>Guess a number between 1 and 100</p>
         <div class="counter-container">
             <div class="counter-item">
-                <span class="counter-label">تلاش‌های استفاده شده:</span>
+                <span class="counter-label">Attempts Used:</span>
                 <span class="counter-value" id="attemptsUsed">0</span>
             </div>
             <div class="counter-item">
-                <span class="counter-label">فرصت‌های باقی‌مانده:</span>
+                <span class="counter-label">Attempts Left:</span>
                 <span class="counter-value" id="attemptsLeft">10</span>
             </div>
         </div>
         <div>
-            <input type="number" placeholder="حدس خود را وارد کنید" id="guessFile">
-            <button id="submitGuess">ارسال</button>
+            <input type="number" placeholder="Enter your guess" id="guessFile">
+            <button id="submitGuess">Submit</button>
         </div>
         <p id="message"></p>
     </section>

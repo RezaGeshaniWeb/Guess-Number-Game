@@ -11,14 +11,14 @@ const game = {
 
         if (guess === this.secretNumber) {
             this.isGameOver = true
-            return { message: `تبریک ، شما برنده شدید با ${this.attempts} تلاش`, gameOver: true }
+            return { message: `Congratulations! You won with ${this.attempts} attempt${this.attempts > 1 ? 's' : ''}`, gameOver: true }
         } else if (this.attempts >= this.maxAttempts) {
             this.isGameOver = true
-            return { message: `بازی تمام شد! عدد مورد نظر ${this.secretNumber} بود`, gameOver: true }
+            return { message: `Game Over! The number was ${this.secretNumber}`, gameOver: true }
         } else if (guess < this.secretNumber) {
-            return { message: `بالاتر`, gameOver: false }
+            return { message: `Higher`, gameOver: false }
         } else {
-            return { message: `پایین تر`, gameOver: false }
+            return { message: `Lower`, gameOver: false }
         }
     },
 
@@ -84,7 +84,7 @@ function makeGuess() {
     let guess = document.querySelector('#guessFile').value
     
     if (!guess || guess < 1 || guess > 100) {
-        document.querySelector('#message').innerText = 'لطفاً یک عدد معتبر بین 1 تا 100 وارد کنید'
+        document.querySelector('#message').innerText = 'Please enter a valid number between 1 and 100'
         return
     }
     
