@@ -5,8 +5,6 @@ const game = {
     isGameOver: false,
 
     checkGuess: function(guess) {
-        console.log(this.secretNumber);
-
         guess = parseInt(guess)
 
         this.attempts++
