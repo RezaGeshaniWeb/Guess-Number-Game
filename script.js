@@ -2,21 +2,32 @@ const game = {
     secretNumber: Math.floor(Math.random() * 100) + 1,
     attempts: 0,
     maxAttempts: 10,
+    isGameOver: false,
 
     checkGuess: function(guess) {
+        console.log(this.secretNumber);
+
         guess = parseInt(guess)
 
         this.attempts++
 
         if (guess === this.secretNumber) {
-            return `تبریک ، شما برنده شدید با ${this.attempts} تلاش`
+            this.isGameOver = true
+            return { message: `تبریک ، شما برنده شدید با ${this.attempts} تلاش`, gameOver: true }
         } else if (this.attempts >= this.maxAttempts) {
-            return `بازی تمام شد! عدد مورد نظر ${this.secretNumber} بود`
+            this.isGameOver = true
+            return { message: `بازی تمام شد! عدد مورد نظر ${this.secretNumber} بود`, gameOver: true }
         } else if (guess < this.secretNumber) {
-            return `بالاتر`
+            return { message: `بالاتر`, gameOver: false }
         } else {
-            return `پایین تر`
+            return { message: `پایین تر`, gameOver: false }
         }
+    },
+
+    reset: function() {
+        this.secretNumber = Math.floor(Math.random() * 100) + 1
+        this.attempts = 0
+        this.isGameOver = false
     }
 }
 
@@ -36,7 +47,42 @@ function updateCounter() {
     }, 500)
 }
 
+function disableInputs() {
+    const input = document.querySelector('#guessFile')
+    const button = document.querySelector('#submitGuess')
+    input.disabled = true
+    button.disabled = true
+    input.style.opacity = '0.6'
+    input.style.cursor = 'not-allowed'
+    button.style.opacity = '0.6'
+    button.style.cursor = 'not-allowed'
+}
+
+function enableInputs() {
+    const input = document.querySelector('#guessFile')
+    const button = document.querySelector('#submitGuess')
+    input.disabled = false
+    button.disabled = false
+    input.style.opacity = '1'
+    input.style.cursor = 'text'
+    button.style.opacity = '1'
+    button.style.cursor = 'pointer'
+    input.focus()
+}
+
+function resetGame() {
+    game.reset()
+    updateCounter()
+    document.querySelector('#message').innerText = ''
+    document.querySelector('#guessFile').value = ''
+    enableInputs()
+}
+
 function makeGuess() {
+    if (game.isGameOver) {
+        return
+    }
+    
     let guess = document.querySelector('#guessFile').value
     
     if (!guess || guess < 1 || guess > 100) {
@@ -44,11 +90,18 @@ function makeGuess() {
         return
     }
     
-    let message = game.checkGuess(guess)
-    document.querySelector('#message').innerText = message
+    let result = game.checkGuess(guess)
+    document.querySelector('#message').innerText = result.message
     updateCounter()
     
     document.querySelector('#guessFile').value = ''
+    
+    if (result.gameOver) {
+        disableInputs()
+        setTimeout(() => {
+            resetGame()
+        }, 2500)
+    }
 }
 
 const btn = document.querySelector('#submitGuess')
